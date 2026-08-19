@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MLBB Diamond Top Up</title>
+
+<style>
+
+/* ================================
+   RESET
+================================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:
+        Arial,
+        "Noto Sans Myanmar",
+        sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    color:#fff;
+    background:#070a10;
+    overflow-x:hidden;
+}
+
+
+/* ================================
+   BACKGROUND GLOW
+================================ */
+
+body::before{
+    content:"";
+
+    position:fixed;
+
+    width:650px;
+    height:650px;
+
+    left:-300px;
+    top:-300px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,180,255,.20),
+            transparent 68%
+        );
+
+    filter:blur(20px);
+
+    pointer-events:none;
+
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+
+    position:fixed;
+
+    width:650px;
+    height:650px;
+
+    right:-300px;
+    bottom:-300px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(103,50,255,.20),
+            transparent 68%
+        );
+
+    filter:blur(25px);
+
+    pointer-events:none;
+
+    z-index:-2;
+}
+
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar{
+    position:sticky;
+    top:0;
+
+    z-index:100;
+
+    padding:14px 18px;
+
+    background:
+        rgba(5,8,14,.88);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
+}
+
+.nav-inner{
+    width:min(1050px,92%);
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    font-size:20px;
+    font-weight:900;
+}
+
+.brand span{
+    color:#15c4ff;
+
+    text-shadow:
+        0 0 8px #15c4ff,
+        0 0 25px rgba(21,196,255,.45);
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    color:#8d99aa;
+
+    font-size:12px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#24e68c;
+
+    box-shadow:
+        0 0 10px #24e68c;
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.hero{
+    width:min(1050px,92%);
+
+    margin:auto;
+
+    padding:
+        55px 15px
+        35px;
+
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+
+    padding:
+        7px 14px;
+
+    border-radius:30px;
+
+    color:#7bdcff;
+
+    background:
+        rgba(0,185,255,.08);
+
+    border:
+        1px solid rgba(0,185,255,.20);
+
+    font-size:12px;
+
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:
+        clamp(34px,8vw,60px);
+
+    font-weight:1000;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #25c9ff,
+            #fff
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.hero p{
+    margin-top:10px;
+
+    color:#818da0;
+
+    font-size:14px;
+}
+
+
+/* ================================
+   CONTAINER
+================================ */
+
+.container{
+    width:min(1050px,92%);
+
+    margin:auto;
+
+    padding-bottom:60px;
+}
+
+
+/* ================================
+   SECTION TITLE
+================================ */
+
+.section{
+    margin-top:22px;
+}
+
+.section-title{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:14px;
+
+    font-size:17px;
+
+    font-weight:800;
+}
+
+.section-title::before{
+    content:"";
+
+    width:4px;
+    height:20px;
+
+    border-radius:10px;
+
+    background:#12c5ff;
+
+    box-shadow:
+        0 0 12px #12c5ff;
+}
+
+
+/* ================================
+   PACKAGE
+================================ */
+
+.package-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+}
+
+.package{
+    position:relative;
+
+    min-height:88px;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    transition:.2s;
+}
+
+.package::after{
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    right:-50px;
+    top:-50px;
+
+    border-radius:50%;
+
+    background:#00baff;
+
+    filter:blur(40px);
+
+    opacity:.08;
+}
+
+.package:hover{
+    transform:translateY(-3px);
+
+    border-color:
+        rgba(0,194,255,.55);
+}
+
+.package.selected{
+    border-color:#11c6ff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,190,255,.14),
+            rgba(255,255,255,.035)
+        );
+
+    box-shadow:
+        0 0 22px
+        rgba(0,190,255,.13);
+}
+
+.package-check{
+    position:absolute;
+
+    right:10px;
+    top:10px;
+
+    width:20px;
+    height:20px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    border:
+        1px solid #465164;
+
+    color:transparent;
+
+    font-size:12px;
+}
+
+.package.selected
+.package-check{
+    color:#001018;
+
+    background:#12c6ff;
+
+    border-color:#12c6ff;
+}
+
+.package-name{
+    color:#dce5f2;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    padding-right:24px;
+}
+
+.package-price{
+    margin-top:9px;
+
+    color:#13c6ff;
+
+    font-size:16px;
+
+    font-weight:900;
+}
+
+
+/* ================================
+   CARD
+================================ */
+
+.card{
+    margin-top:22px;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.16);
+}
+
+.card-title{
+    margin-bottom:17px;
+
+    font-size:17px;
+
+    font-weight:800;
+}
+
+
+/* ================================
+   INPUT
+================================ */
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+}
+
+label{
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#aab5c6;
+
+    font-size:13px;
+}
+
+input[type="text"]{
+    width:100%;
+
+    height:48px;
+
+    padding:0 14px;
+
+    border-radius:11px;
+
+    border:
+        1px solid #293344;
+
+    outline:none;
+
+    color:#fff;
+
+    background:#0b1018;
+
+    font-size:14px;
+}
+
+input[type="text"]:focus{
+    border-color:#12c5ff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(18,197,255,.07);
+}
+
+
+/* ================================
+   PAYMENT
+================================ */
+
+.payment-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+}
+
+.payment{
+    min-height:100px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px;
+
+    border-radius:15px;
+
+    border:
+        1px solid #2b3444;
+
+    background:#0b0f17;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.payment:hover{
+    border-color:#12bfff;
+}
+
+.payment.active{
+    border-color:#12c6ff;
+
+    background:
+        rgba(0,190,255,.06);
+
+    box-shadow:
+        0 0 18px
+        rgba(0,190,255,.10);
+}
+
+.payment-logo{
+    width:62px;
+    height:62px;
+
+    padding:7px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    border-radius:13px;
+
+    background:#fff;
+
+    overflow:hidden;
+}
+
+.payment-logo img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+}
+
+.payment-info strong{
+    display:block;
+
+    font-size:15px;
+}
+
+.payment-info span{
+    display:block;
+
+    margin-top:5px;
+
+    color:#758195;
+
+    font-size:11px;
+}
+
+
+/* ================================
+   PAYMENT BOX
+================================ */
+
+.payment-box{
+    display:none;
+
+    margin-top:16px;
+
+    padding:17px;
+
+    border-radius:15px;
+
+    background:#090d14;
+
+    border:
+        1px solid rgba(255,255,255,.07);
+}
+
+.payment-box.show{
+    display:block;
+}
+
+
+/* ================================
+   ACCOUNT
+================================ */
+
+.account-box{
+    margin-bottom:15px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    background:
+        rgba(0,190,255,.055);
+
+    border:
+        1px solid rgba(0,190,255,.15);
+}
+
+.account-label{
+    color:#8491a5;
+
+    font-size:12px;
+
+    margin-bottom:5px;
+}
+
+.account-number{
+    color:#14c6ff;
+
+    font-size:19px;
+
+    font-weight:900;
+}
+
+.account-name{
+    margin-top:4px;
+
+    color:#aeb9c9;
+
+    font-size:12px;
+}
+
+
+/* ================================
+   RECEIPT UPLOAD
+================================ */
+
+.receipt-input{
+    display:none;
+}
+
+
+/*
+   IMPORTANT:
+   ပုံ preview က upload box
+   ထဲမှာပဲ ပေါ်မယ်
+*/
+
+.upload-area{
+    position:relative;
+
+    width:100%;
+
+    min-height:135px;
+
+    padding:15px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    border:
+        1px dashed #3d485a;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.015);
+
+    color:#8793a6;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    transition:.2s;
+}
+
+.upload-area:hover{
+    border-color:#13c6ff;
+
+    color:#b8edff;
+}
+
+
+/*
+   Upload text
+*/
+
+.upload-content{
+    position:relative;
+
+    z-index:2;
+}
+
+.upload-icon{
+    font-size:30px;
+
+    margin-bottom:7px;
+}
+
+.upload-small{
+    display:block;
+
+    margin-top:6px;
+
+    color:#586578;
+
+    font-size:10px;
+}
+
+
+/*
+   Preview image
+*/
+
+.receipt-preview{
+    position:absolute;
+
+    inset:5px;
+
+    width:calc(100% - 10px);
+    height:calc(100% - 10px);
+
+    object-fit:contain;
+
+    border-radius:10px;
+
+    background:#05070b;
+
+    display:none;
+
+    z-index:3;
+}
+
+.receipt-preview.show{
+    display:block;
+}
+
+
+/* ================================
+   SUMMARY
+================================ */
+
+.summary{
+    margin-top:17px;
+
+    padding:15px;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid rgba(255,255,255,.06);
+}
+
+.summary-row{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:6px 0;
+
+    color:#96a2b4;
+
+    font-size:13px;
+}
+
+.summary-row strong{
+    color:#fff;
+
+    text-align:right;
+}
+
+.total{
+    margin-top:7px;
+
+    padding-top:12px;
+
+    border-top:
+        1px solid #293243;
+}
+
+.total strong{
+    color:#13c6ff;
+
+    font-size:19px;
+}
+
+
+/* ================================
+   BUY
+================================ */
+
+.buy-button{
+    width:100%;
+
+    height:53px;
+
+    margin-top:18px;
+
+    border:0;
+
+    border-radius:13px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            100deg,
+            #0878ff,
+            #0cc8ff
+        );
+
+    font-size:16px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,156,255,.20);
+
+    transition:.2s;
+}
+
+.buy-button:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,156,255,.30);
+}
+
+
+/* ================================
+   MODAL
+================================ */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    z-index:999;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:
+        rgba(0,0,0,.76);
+
+    backdrop-filter:blur(8px);
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(430px,100%);
+
+    padding:27px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    background:#10151f;
+
+    border:
+        1px solid
+        rgba(0,195,255,.25);
+
+    box-shadow:
+        0 0 45px
+        rgba(0,150,255,.15);
+}
+
+.modal-icon{
+    font-size:45px;
+
+    margin-bottom:12px;
+}
+
+.modal-box h2{
+    margin-bottom:10px;
+
+    font-size:21px;
+}
+
+.modal-box p{
+    color:#98a4b7;
+
+    line-height:1.75;
+
+    font-size:13px;
+}
+
+.close-button{
+    margin-top:18px;
+
+    padding:
+        11px 27px;
+
+    border:0;
+
+    border-radius:9px;
+
+    color:#fff;
+
+    background:#202938;
+
+    cursor:pointer;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer{
+    padding:35px 15px;
+
+    text-align:center;
+
+    color:#596579;
+
+    font-size:11px;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media(max-width:800px){
+
+    .package-grid{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:560px){
+
+    .package-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .payment-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding-top:40px;
+    }
+
+}
+
+@media(max-width:350px){
+
+    .package-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================
+     NAV
+================================ -->
+
+<nav class="navbar">
+
+    <div class="nav-inner">
+
+        <div class="brand">
+            <span>MLBB</span> TOP UP
+        </div>
+
+        <div class="status">
+
+            <span class="dot"></span>
+
+            Online
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================================
+     HERO
+================================ -->
+
+<section class="hero">
+
+    <div class="badge">
+        ⚡ FAST & SECURE TOP-UP
+    </div>
+
+    <h1>
+        MOBILE LEGENDS
+    </h1>
+
+    <p>
+        Diamond & Special Package
+    </p>
+
+</section>
+
+
+<main class="container">
+
+
+<!-- ================================
+     SPECIAL
+================================ -->
+
+<section class="section">
+
+    <div class="section-title">
+        Special Packages
+    </div>
+
+
+    <div class="package-grid">
+
+
+        <div
+            class="package"
+            data-name="Weekly Pass"
+            data-price="6300"
+        >
+
+            <div class="package-check">
+                ✓
+            </div>
+
+            <div class="package-name">
+                💎 Weekly Pass
+            </div>
+
+            <div class="package-price">
+                6,300 KS
+            </div>
+
+        </div>
+
+
+        <div
+            class="package"
+            data-name="Monthly Epic Bundle"
+            data-price="16800"
+        >
+
+            <div class="package-check">
+                ✓
+            </div>
+
+            <div class="package-name">
+                Monthly Epic Bundle
+            </div>
+
+            <div class="package-price">
+                16,800 KS
+            </div>
+
+        </div>
+
+
+        <div
+            class="package"
+            data-name="Weekly Elite Bundle"
+            data-price="3500"
+        >
+
+            <div class="package-check">
+                ✓
+            </div>
+
+            <div class="package-name">
+                Weekly Elite Bundle
+            </div>
+
+            <div class="package-price">
+                3,500 KS
+            </div>
+
+        </div>
+
+
+        <div
+            class="package"
+            data-name="Twilight Pass"
+            data-price="34000"
+        >
+
+            <div class="package-check">
+                ✓
+            </div>
+
+            <div class="package-name">
+                Twilight Pass
+            </div>
+
+            <div class="package-price">
+                34,000 KS
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================================
+     DIAMONDS
+================================ -->
+
+<section class="section">
+
+    <div class="section-title">
+        Diamond Packages
+    </div>
+
+
+    <div class="package-grid">
+
+
+        <div class="package"
+            data-name="11 Diamonds"
+            data-price="950">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 11
+            </div>
+
+            <div class="package-price">
+                950 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="22 Diamonds"
+            data-price="1900">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 22
+            </div>
+
+            <div class="package-price">
+                1,900 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="33 Diamonds"
+            data-price="2800">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 33
+            </div>
+
+            <div class="package-price">
+                2,800 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="44 Diamonds"
+            data-price="3800">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 44
+            </div>
+
+            <div class="package-price">
+                3,800 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="56 Diamonds"
+            data-price="4300">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 56
+            </div>
+
+            <div class="package-price">
+                4,300 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="86 Diamonds"
+            data-price="5600">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 86
+            </div>
+
+            <div class="package-price">
+                5,600 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="112 Diamonds"
+            data-price="8600">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 112
+            </div>
+
+            <div class="package-price">
+                8,600 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="172 Diamonds"
+            data-price="10800">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 172
+            </div>
+
+            <div class="package-price">
+                10,800 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="257 Diamonds"
+            data-price="15800">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 257
+            </div>
+
+            <div class="package-price">
+                15,800 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="343 Diamonds"
+            data-price="21150">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 343
+            </div>
+
+            <div class="package-price">
+                21,150 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="429 Diamonds"
+            data-price="26500">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 429
+            </div>
+
+            <div class="package-price">
+                26,500 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="514 Diamonds"
+            data-price="31600">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 514
+            </div>
+
+            <div class="package-price">
+                31,600 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="600 Diamonds"
+            data-price="36950">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 600
+            </div>
+
+            <div class="package-price">
+                36,950 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="706 Diamonds"
+            data-price="41900">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 706
+            </div>
+
+            <div class="package-price">
+                41,900 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="878 Diamonds"
+            data-price="52500">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 878
+            </div>
+
+            <div class="package-price">
+                52,500 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="963 Diamonds"
+            data-price="57600">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 963
+            </div>
+
+            <div class="package-price">
+                57,600 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="1049 Diamonds"
+            data-price="62950">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 1049
+            </div>
+
+            <div class="package-price">
+                62,950 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="1135 Diamonds"
+            data-price="68300">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 1135
+            </div>
+
+            <div class="package-price">
+                68,300 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="1412 Diamonds"
+            data-price="83600">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 1412
+            </div>
+
+            <div class="package-price">
+                83,600 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="2195 Diamonds"
+            data-price="129500">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 2195
+            </div>
+
+            <div class="package-price">
+                129,500 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="3688 Diamonds"
+            data-price="216000">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 3688
+            </div>
+
+            <div class="package-price">
+                216,000 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="5532 Diamonds"
+            data-price="326000">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 5532
+            </div>
+
+            <div class="package-price">
+                326,000 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="9288 Diamonds"
+            data-price="533000">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 9288
+            </div>
+
+            <div class="package-price">
+                533,000 KS
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================================
+     NORMAL SERVER
+================================ -->
+
+<section class="section">
+
+    <div class="section-title">
+        Normal Server 2× Price
+    </div>
+
+
+    <div class="package-grid">
+
+
+        <div class="package"
+            data-name="50 + 50 Diamonds"
+            data-price="3550">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 50 + 50
+            </div>
+
+            <div class="package-price">
+                3,550 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="150 + 150 Diamonds"
+            data-price="10700">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 150 + 150
+            </div>
+
+            <div class="package-price">
+                10,700 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="250 + 250 Diamonds"
+            data-price="17100">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 250 + 250
+            </div>
+
+            <div class="package-price">
+                17,100 KS
+            </div>
+
+        </div>
+
+
+        <div class="package"
+            data-name="500 + 500 Diamonds"
+            data-price="34600">
+
+            <div class="package-check">✓</div>
+
+            <div class="package-name">
+                💎 500 + 500
+            </div>
+
+            <div class="package-price">
+                34,600 KS
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================================
+     PLAYER
+================================ -->
+
+<section class="card">
+
+    <div class="card-title">
+        Player Information
+    </div>
+
+
+    <div class="form-grid">
+
+        <div>
+
+            <label>
+                Game ID
+            </label>
+
+            <input
+                id="gameId"
+                type="text"
+                placeholder="Enter Game ID"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Player Name
+            </label>
+
+            <input
+                id="playerName"
+                type="text"
+                placeholder="Enter Player Name"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================
+     PAYMENT
+================================ -->
+
+<section class="card">
+
+    <div class="card-title">
+        Payment Method
+    </div>
+
+
+    <div class="payment-grid">
+
+
+        <!-- KPAY -->
+
+        <div
+            class="payment active"
+            id="kpayPayment"
+            onclick="choosePayment('kpay')"
+        >
+
+            <div class="payment-logo">
+
+                <img
+                    src="7844c3a607d1bc34a879ea96f6382d81 (1).jpg"
+                    alt="KPay"
+                >
+
+            </div>
+
+            <div class="payment-info">
+
+                <strong>
+                    KPay
+                </strong>
+
+                <span>
+                    Available
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- WAVEPAY -->
+
+        <div
+            class="payment"
+            id="wavePayment"
+            onclick="choosePayment('wave')"
+        >
+
+            <div class="payment-logo">
+
+                <img
+                    src="Bf457901bf5c15ca935fa5236259c441.jpg"
+                    alt="WavePay"
+                >
+
+            </div>
+
+            <div class="payment-info">
+
+                <strong>
+                    WavePay
+                </strong>
+
+                <span>
+                    Available
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ============================
+         KPAY
+    ============================ -->
+
+    <div
+        class="payment-box show"
+        id="kpayBox"
+    >
+
+        <div class="account-box">
+
+            <div class="account-label">
+                KPay Account
+            </div>
+
+            <div class="account-number">
+                09XXXXXXXXX
+            </div>
+
+            <div class="account-name">
+                Account Name : YOUR NAME
+            </div>
+
+        </div>
+
+
+        <label>
+            Payment Receipt
+        </label>
+
+
+        <input
+            class="receipt-input"
+            id="kpayReceipt"
+            type="file"
+            accept="image/*"
+        >
+
+
+        <label
+            class="upload-area"
+            for="kpayReceipt"
+        >
+
+            <div class="upload-content">
+
+                <div class="upload-icon">
+                    📷
+                </div>
+
+                <div>
+                    ငွေလွှဲပြေစာပုံ
+                    ထည့်ရန်နှိပ်ပါ
+                </div>
+
+                <span class="upload-small">
+                    JPG / PNG
+                </span>
+
+            </div>
+
+
+            <img
+                class="receipt-preview"
+                id="kpayPreview"
+                alt="KPay Receipt"
+            >
+
+        </label>
+
+    </div>
+
+
+    <!-- ============================
+         WAVEPAY
+    ============================ -->
+
+    <div
+        class="payment-box"
+        id="waveBox"
+    >
+
+        <div class="account-box">
+
+            <div class="account-label">
+                WavePay Account
+            </div>
+
+            <div class="account-number">
+                09XXXXXXXXX
+            </div>
+
+            <div class="account-name">
+                Account Name : YOUR NAME
+            </div>
+
+        </div>
+
+
+        <label>
+            Payment Receipt
+        </label>
+
+
+        <input
+            class="receipt-input"
+            id="waveReceipt"
+            type="file"
+            accept="image/*"
+        >
+
+
+        <label
+            class="upload-area"
+            for="waveReceipt"
+        >
+
+            <div class="upload-content">
+
+                <div class="upload-icon">
+                    📷
+                </div>
+
+                <div>
+                    ငွေလွှဲပြေစာပုံ
+                    ထည့်ရန်နှိပ်ပါ
+                </div>
+
+                <span class="upload-small">
+                    JPG / PNG
+                </span>
+
+            </div>
+
+
+            <img
+                class="receipt-preview"
+                id="wavePreview"
+                alt="WavePay Receipt"
+            >
+
+        </label>
+
+    </div>
+
+
+    <!-- ============================
+         SUMMARY
+    ============================ -->
+
+    <div class="summary">
+
+        <div class="summary-row">
+
+            <span>
+                Selected Package
+            </span>
+
+            <strong id="summaryPackage">
+                မရွေးရသေးပါ
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row total">
+
+            <span>
+                Total
+            </span>
+
+            <strong id="summaryPrice">
+                0 KS
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="buy-button"
+        onclick="placeOrder()"
+    >
+        ဝယ်ယူမည်
+    </button>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    MLBB TOP UP • Fast & Secure
+
+</footer>
+
+
+<!-- ================================
+     SUCCESS MODAL
+================================ -->
+
+<div
+    class="modal"
+    id="successModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-icon">
+            ✅
+        </div>
+
+
+        <h2>
+            Order တင်ပြီးပါပြီ
+        </h2>
+
+
+        <p>
+
+            ဝယ်ယူပေးတဲ့အတွက်
+            ကျေးဇူးတင်ပါတယ်။
+
+            <br><br>
+
+            သင့်ရဲ့ Game ID၊ Player Name နဲ့
+            ငွေလွှဲပြေစာကို စစ်ဆေးပြီးနောက်
+
+            <strong style="color:#13c6ff;">
+                5 မိနစ်အတွင်း
+            </strong>
+
+            Order ကို ဆောင်ရွက်ပေးပါမယ်။
+
+            <br><br>
+
+            Game ID နှင့် Player Name
+            မှန်ကန်ကြောင်း သေချာစစ်ဆေးပေးပါ။
+
+        </p>
+
+
+        <button
+            class="close-button"
+            onclick="closeModal()"
+        >
+            OK
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =================================
+   VARIABLES
+================================= */
+
+let selectedPackage = null;
+
+let paymentMethod = "kpay";
+
+
+/* =================================
+   PACKAGE SELECT
+================================= */
+
+const packages =
+document.querySelectorAll(".package");
+
+
+packages.forEach(function(item){
+
+    item.addEventListener(
+        "click",
+        function(){
+
+            packages.forEach(function(p){
+
+                p.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            this.classList.add(
+                "selected"
+            );
+
+
+            selectedPackage = {
+
+                name:
+                    this.dataset.name,
+
+                price:
+                    Number(
+                        this.dataset.price
+                    )
+
+            };
+
+
+            updateSummary();
+
+        }
+    );
+
+});
+
+
+/* =================================
+   SUMMARY
+================================= */
+
+function updateSummary(){
+
+    if(!selectedPackage){
+
+        document
+        .getElementById(
+            "summaryPackage"
+        )
+        .innerText =
+            "မရွေးရသေးပါ";
+
+        document
+        .getElementById(
+            "summaryPrice"
+        )
+        .innerText =
+            "0 KS";
+
+        return;
+    }
+
+
+    document
+    .getElementById(
+        "summaryPackage"
+    )
+    .innerText =
+        selectedPackage.name;
+
+
+    document
+    .getElementById(
+        "summaryPrice"
+    )
+    .innerText =
+        selectedPackage.price
+        .toLocaleString()
+        + " KS";
+
+}
+
+
+/* =================================
+   PAYMENT SWITCH
+================================= */
+
+function choosePayment(method){
+
+    paymentMethod = method;
+
+
+    const kpayPayment =
+        document.getElementById(
+            "kpayPayment"
+        );
+
+    const wavePayment =
+        document.getElementById(
+            "wavePayment"
+        );
+
+    const kpayBox =
+        document.getElementById(
+            "kpayBox"
+        );
+
+    const waveBox =
+        document.getElementById(
+            "waveBox"
+        );
+
+
+    if(method === "kpay"){
+
+        kpayPayment
+        .classList.add("active");
+
+        wavePayment
+        .classList.remove("active");
+
+
+        kpayBox
+        .classList.add("show");
+
+        waveBox
+        .classList.remove("show");
+
+    }
+
+
+    if(method === "wave"){
+
+        wavePayment
+        .classList.add("active");
+
+        kpayPayment
+        .classList.remove("active");
+
+
+        waveBox
+        .classList.add("show");
+
+        kpayBox
+        .classList.remove("show");
+
+    }
+
+}
+
+
+/* =================================
+   RECEIPT PREVIEW FUNCTION
+================================ */
+
+function setupReceiptPreview(
+    inputId,
+    previewId
+){
+
+    const input =
+        document.getElementById(
+            inputId
+        );
+
+    const preview =
+        document.getElementById(
+            previewId
+        );
+
+
+    input.addEventListener(
+        "change",
+        function(){
+
+            const file =
+                this.files[0];
+
+
+            if(!file){
+
+                preview.src = "";
+
+                preview.classList.remove(
+                    "show"
+                );
+
+                return;
+            }
+
+
+            if(
+                !file.type.startsWith(
+                    "image/"
+                )
+            ){
+
+                alert(
+                    "ပုံဖိုင်ကိုသာ ထည့်ပေးပါ။"
+                );
+
+                input.value = "";
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event){
+
+                    preview.src =
+                        event.target.result;
+
+                    preview.classList.add(
+                        "show"
+                    );
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+/* =================================
+   KPAY RECEIPT
+================================ */
+
+setupReceiptPreview(
+    "kpayReceipt",
+    "kpayPreview"
+);
+
+
+/* =================================
+   WAVEPAY RECEIPT
+================================ */
+
+setupReceiptPreview(
+    "waveReceipt",
+    "wavePreview"
+);
+
+
+/* =================================
+   PLACE ORDER
+================================ */
+
+function placeOrder(){
+
+    if(!selectedPackage){
+
+        alert(
+            "Diamond / Package တစ်ခုကို အရင်ရွေးပေးပါ။"
+        );
+
+        return;
+    }
+
+
+    const gameId =
+        document
+        .getElementById(
+            "gameId"
+        )
+        .value
+        .trim();
+
+
+    const playerName =
+        document
+        .getElementById(
+            "playerName"
+        )
+        .value
+        .trim();
+
+
+    if(!gameId){
+
+        alert(
+            "Game ID ထည့်ပေးပါ။"
+        );
+
+        return;
+    }
+
+
+    if(!playerName){
+
+        alert(
+            "Player Name ထည့်ပေးပါ။"
+        );
+
+        return;
+    }
+
+
+    let receiptFile = null;
+
+
+    if(paymentMethod === "kpay"){
+
+        receiptFile =
+            document
+            .getElementById(
+                "kpayReceipt"
+            )
+            .files[0];
+
+    }
+
+
+    if(paymentMethod === "wave"){
+
+        receiptFile =
+            document
+            .getElementById(
+                "waveReceipt"
+            )
+            .files[0];
+
+    }
+
+
+    if(!receiptFile){
+
+        alert(
+            "ငွေလွှဲပြေစာပုံ ထည့်ပေးပါ။"
+        );
+
+        return;
+    }
+
+
+    /*
+       Order information ကို
+       အောက်ပါအတိုင်း ရယူနိုင်ပါတယ်။
+
+       selectedPackage.name
+       selectedPackage.price
+       gameId
+       playerName
+       paymentMethod
+       receiptFile
+
+       နောက်ပိုင်း Backend /
+       Telegram Bot နဲ့ ချိတ်နိုင်ပါတယ်။
+    */
+
+
+    document
+    .getElementById(
+        "successModal"
+    )
+    .classList.add(
+        "show"
+    );
+
+}
+
+
+/* =================================
+   CLOSE MODAL
+================================ */
+
+function closeModal(){
+
+    document
+    .getElementById(
+        "successModal"
+    )
+    .classList.remove(
+        "show"
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
